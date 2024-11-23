@@ -7,6 +7,8 @@
 #include "Tag/ABGamePlayTag.h"
 
 UABGA_Rotate::UABGA_Rotate() {
+	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
+
 	AbilityTags.AddTag(ABTAG_ACTOR_ROTATE);
 	ActivationOwnedTags.AddTag(ABTAG_ACTOR_ISROTATING);
 }
