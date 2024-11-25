@@ -29,4 +29,16 @@ private:
 	
 	UFUNCTION()
 	void OnInterruptedCallback();
+	
+	FName GetNextSection();
+	void StartComboTimer();
+	void CheckComboInput();
+	
+private:
+	UPROPERTY()
+	TObjectPtr<class UABComboActionData> CurrentComboData;
+	
+	uint8 CurrentCombo = 0;
+	FTimerHandle ComboTimerHandle;
+	bool HasNextComboInput = false;
 };
