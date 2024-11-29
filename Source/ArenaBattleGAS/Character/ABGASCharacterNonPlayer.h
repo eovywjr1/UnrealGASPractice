@@ -4,21 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "GameFramework/PlayerState.h"
-#include "ABGASPlayerState.generated.h"
+#include "Character/ABCharacterNonPlayer.h"
+#include "ABGASCharacterNonPlayer.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ARENABATTLEGAS_API AABGASPlayerState : public APlayerState, public IAbilitySystemInterface
+class ARENABATTLEGAS_API AABGASCharacterNonPlayer : public AABCharacterNonPlayer, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
-public:
-	AABGASPlayerState();
+private:
+	AABGASCharacterNonPlayer();
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override final { return AbilitySystemComponent; }
+	virtual void PossessedBy(AController* NewController) override final;
 	
 private:
 	UPROPERTY()

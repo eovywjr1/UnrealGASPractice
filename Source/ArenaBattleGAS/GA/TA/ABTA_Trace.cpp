@@ -3,7 +3,9 @@
 
 #include "GA/TA/ABTA_Trace.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "Abilities/GameplayAbility.h"
+#include "Attribute/ABCharacterAttributeSet.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Character.h"
 #include "Physics/ABCollision.h"
@@ -28,10 +30,21 @@ FGameplayAbilityTargetDataHandle AABTA_Trace::MakeTargetData() const
 {
 	ACharacter* Character = CastChecked<ACharacter>(SourceActor);
 
+	UAbilitySystemComponent* AbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(SourceActor);
+	if (AbilitySystemComponent == nullptr)
+	{
+		return FGameplayAbilityTargetDataHandle();
+	}
+
+	const UABCharacterAttributeSet* AttributeSet = AbilitySystemComponent->GetSet<UABCharacterAttributeSet>();
+	if (AttributeSet == nullptr)
+	{
+		return FGameplayAbilityTargetDataHandle();
+	}
+	
 	FHitResult OutHitResult;
-	// 현재 하드코딩이지만 Attribute를 통해 얻을 수 있음
-	const float AttackRange = 100.0f;
-	const float AttackRadius = 50.0f;
+	const float AttackRange = AttributeSet->GetAttackRange();
+	const float AttackRadius = AttributeSet->GetAttackRadius();
 
 	FCollisionQueryParams Params(SCENE_QUERY_STAT(UABTA_Trace), false, Character);
 	const FVector Forward = Character->GetActorForwardVector();
