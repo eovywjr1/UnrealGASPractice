@@ -14,14 +14,17 @@ UCLASS()
 class ARENABATTLEGAS_API UAnimNotify_GASAttackHitCheck : public UAnimNotify
 {
 	GENERATED_BODY()
-	
+
 private:
 	UAnimNotify_GASAttackHitCheck();
-	
+
 	virtual FString GetNotifyName_Implementation() const override final;
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference) override final;
-	
+
 private:
 	UPROPERTY(EditAnywhere, Meta = (AllowPrivateAccess = true))
 	FGameplayTag TriggerGameplayTag;
+
+	UPROPERTY(EditAnywhere, Meta = (AllowPrivateAccess = true))
+	float ComboAttackLevel = 1.0f;
 };

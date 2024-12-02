@@ -27,4 +27,10 @@ private:
 	
 	UPROPERTY()
 	TObjectPtr<class UABCharacterAttributeSet> AttributeSet;
+	
+	UPROPERTY(EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+	TSubclassOf<class UGameplayEffect> InitStatEffect;
+	
+	UPROPERTY(EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+	float Level = 1.0f;
 };

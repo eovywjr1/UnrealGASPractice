@@ -21,4 +21,10 @@ private:
 	
 	UFUNCTION()
 	void OnTraceResultCallback(const FGameplayAbilityTargetDataHandle& TargetDataHandle);
+	
+private:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class UGameplayEffect> AttackDamageEffect;
+	
+	float CurrentComboLevel = 0.0f;
 };

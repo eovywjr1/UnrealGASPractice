@@ -21,6 +21,8 @@ class ARENABATTLEGAS_API UABCharacterAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 	
+	friend class UABGE_AttackDamage;
+	
 private:
 	UABCharacterAttributeSet();
 	
@@ -33,11 +35,10 @@ public:
 	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxAttackRate);
 	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, Health);
 	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxHealth);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, Damage);
 	
 private:
-	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override final;
-
-	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override final;
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data);
 
 private:
 	UPROPERTY(EditAnywhere, Meta=(AllowPrivateAccess=true))
@@ -63,4 +64,7 @@ private:
 	
 	UPROPERTY(EditAnywhere, Meta=(AllowPrivateAccess=true))
 	FGameplayAttributeData MaxHealth;
+	
+	UPROPERTY(EditAnywhere, Meta=(AllowPrivateAccess=true))
+	FGameplayAttributeData Damage;
 };
