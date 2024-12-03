@@ -21,6 +21,9 @@ private:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override final { return AbilitySystemComponent; }
 	virtual void PossessedBy(AController* NewController) override final;
 	
+	UFUNCTION()
+	void OnOutOfHealth();
+	
 private:
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -33,4 +36,7 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, meta=(AllowPrivateAccess=true))
 	float Level = 1.0f;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "GAS")
+	TObjectPtr<class UABGASWidgetComponent> HpBar;
 };

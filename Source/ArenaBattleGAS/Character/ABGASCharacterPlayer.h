@@ -27,6 +27,11 @@ private:
 	void SetupGASInputComponent();
 	void GASInputPressed(int32 InInputID);
 	void GASInputReleased(int32 InInputID);
+	
+	UFUNCTION()
+	void OnOutOfHealth();
+	
+private:
 
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -36,4 +41,7 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TMap<int32, TSubclassOf<class UGameplayAbility>> InputAbilities;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "GAS")
+	TObjectPtr<class UABGASWidgetComponent> HpBar;
 };

@@ -4,11 +4,8 @@
     <list default="true" id="9812d267-e9c7-4228-bc4d-a8c2b1662ac6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArenaBattleGAS.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArenaBattleGAS.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArenaBattleGAS.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaBattleGAS.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Map/GASStep2.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Map/GASStep2.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/TA/ABTA_Trace.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/TA/ABTA_Trace.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ArenaBattleGAS.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaBattleGAS.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Character/ABGASCharacterNonPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Character/ABGASCharacterNonPlayer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +59,10 @@
       <workItem from="1732882113121" duration="1000" />
       <workItem from="1732886138171" duration="26000" />
       <workItem from="1732886172760" duration="11000" />
+      <workItem from="1733161127920" duration="2000" />
+      <workItem from="1733164030077" duration="7000" />
+      <workItem from="1733222601889" duration="11000" />
+      <workItem from="1733222669270" duration="13000" />
     </task>
     <servers />
   </component>

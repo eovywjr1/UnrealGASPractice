@@ -26,5 +26,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class UGameplayEffect> AttackDamageEffect;
 	
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class UGameplayEffect> AttackBuffEffect;
+	
 	float CurrentComboLevel = 0.0f;
 };

@@ -13,6 +13,8 @@
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfHealthDelegate);
+
 /**
  * 
  */
@@ -38,7 +40,11 @@ public:
 	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, Damage);
 	
 private:
-	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data);
+	virtual bool PreGameplayEffectExecute(struct FGameplayEffectModCallbackData &Data) override final;
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data) override final;
+	
+public:
+	mutable FOutOfHealthDelegate OnOutOfHealth;
 
 private:
 	UPROPERTY(EditAnywhere, Meta=(AllowPrivateAccess=true))
@@ -67,4 +73,6 @@ private:
 	
 	UPROPERTY(EditAnywhere, Meta=(AllowPrivateAccess=true))
 	FGameplayAttributeData Damage;
+	
+	bool bOutOfHealth = false;
 };
