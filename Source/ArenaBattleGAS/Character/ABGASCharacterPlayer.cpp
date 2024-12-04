@@ -7,6 +7,7 @@
 #include "EnhancedInputComponent.h"
 #include "Attribute/ABCharacterAttributeSet.h"
 #include "Player/ABGASPlayerState.h"
+#include "Tag/ABGamePlayTag.h"
 #include "UI/ABGASWidgetComponent.h"
 
 AABGASCharacterPlayer::AABGASCharacterPlayer()
@@ -31,6 +32,15 @@ AABGASCharacterPlayer::AABGASCharacterPlayer()
 		HpBar->SetDrawSize(FVector2D(200.0f, 20.0f));
 		HpBar->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
+
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WeaponMeshRef(TEXT("/Script/Engine.SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Blunt/Blunt_Hellhammer/SK_Blunt_HellHammer.SK_Blunt_HellHammer'"));
+	if (WeaponMeshRef.Object)
+	{
+		WeaponMesh = WeaponMeshRef.Object;
+	}
+
+	WeaponRange = 75.0f;
+	WeaponAttackRate = 100.0f;
 }
 
 void AABGASCharacterPlayer::PossessedBy(AController* NewController)
@@ -45,6 +55,10 @@ void AABGASCharacterPlayer::PossessedBy(AController* NewController)
 		{
 			CurrentAttributeSet->OnOutOfHealth.AddDynamic(this, &ThisClass::OnOutOfHealth);
 		}
+
+		AbilitySystemComponent->GenericGameplayEventCallbacks.FindOrAdd(EVENT_CHARACTER_WEAPON_EQUIP).AddUObject(this, &ThisClass::EquipWeapon);
+		AbilitySystemComponent->GenericGameplayEventCallbacks.FindOrAdd(EVENT_CHARACTER_WEAPON_UNEQUIP).AddUObject(this, &ThisClass::UnEquipWeapon);
+
 
 		for (const TSubclassOf<UGameplayAbility>& Ability : Abilities)
 		{
@@ -118,4 +132,34 @@ void AABGASCharacterPlayer::GASInputReleased(int32 InInputID)
 void AABGASCharacterPlayer::OnOutOfHealth()
 {
 	SetDead();
+}
+
+void AABGASCharacterPlayer::EquipWeapon(const FGameplayEventData* EventData)
+{
+	if (Weapon)
+	{
+		Weapon->SetSkeletalMesh(WeaponMesh);
+		
+		// 수동으로 어트리뷰트에 접근하는 것은 바람직하지 않지만 일부러 구현
+		const float CurrentAttackRange = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute());
+		const float CurrentAttackRate = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute());
+		
+		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute(), CurrentAttackRange + WeaponRange);
+		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute(), CurrentAttackRate + WeaponAttackRate);
+	}
+}
+
+void AABGASCharacterPlayer::UnEquipWeapon(const FGameplayEventData* EventData)
+{
+	if (Weapon)
+	{
+		Weapon->SetSkeletalMesh(nullptr);
+		
+		// 수동으로 어트리뷰트에 접근하는 것은 바람직하지 않지만 일부러 구현
+		const float CurrentAttackRange = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute());
+		const float CurrentAttackRate = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute());
+		
+		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute(), CurrentAttackRange - WeaponRange);
+		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute(), CurrentAttackRate - WeaponAttackRate);
+	}
 }

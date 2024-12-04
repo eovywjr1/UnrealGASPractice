@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "Character/ABCharacterPlayer.h"
+#include "Abilities/GameplayAbilityTypes.h"
 #include "ABGASCharacterPlayer.generated.h"
 
 /**
@@ -31,8 +32,10 @@ private:
 	UFUNCTION()
 	void OnOutOfHealth();
 	
+	void EquipWeapon(const FGameplayEventData* EventData);
+	void UnEquipWeapon(const FGameplayEventData* EventData);
+	
 private:
-
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 	
@@ -44,4 +47,12 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "GAS")
 	TObjectPtr<class UABGASWidgetComponent> HpBar;
+	
+	// 시간 관계상 캐릭터에 선언하는 것, Weapon 객체를 따로 만들고 AttributeSet도 따로 만들어야 함
+	UPROPERTY()
+	TObjectPtr<class USkeletalMesh> WeaponMesh = nullptr;
+	
+	float WeaponRange = 0.0f;
+	
+	float WeaponAttackRate = 0.0f;
 };
