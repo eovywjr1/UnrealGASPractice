@@ -21,6 +21,12 @@ AABGASCharacterPlayer::AABGASCharacterPlayer()
 		ComboActionMontage = ComboActionMontageRef.Object;
 	}
 
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> SkillActionMontageRef(TEXT("/Script/Engine.AnimMontage'/Game/ArenaBattleGAS/Animation/AM_SkillAttack.AM_SkillAttack'"));
+	if (SkillActionMontageRef.Object)
+	{
+		SkillActionMontage = SkillActionMontageRef.Object;
+	}
+
 	HpBar = CreateDefaultSubobject<UABGASWidgetComponent>(TEXT("Widget"));
 	HpBar->SetupAttachment(GetMesh());
 	HpBar->SetRelativeLocation(FVector(0.0f, 0.0f, 180.0f));
@@ -97,6 +103,7 @@ void AABGASCharacterPlayer::SetupGASInputComponent()
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AABGASCharacterPlayer::GASInputPressed, 0);
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AABGASCharacterPlayer::GASInputReleased, 0);
 	EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AABGASCharacterPlayer::GASInputPressed, 1);
+	EnhancedInputComponent->BindAction(SkillAction, ETriggerEvent::Triggered, this, &AABGASCharacterPlayer::GASInputPressed, 2);
 }
 
 void AABGASCharacterPlayer::GASInputPressed(int32 InInputID)
@@ -139,11 +146,19 @@ void AABGASCharacterPlayer::EquipWeapon(const FGameplayEventData* EventData)
 	if (Weapon)
 	{
 		Weapon->SetSkeletalMesh(WeaponMesh);
-		
+
+		FGameplayAbilitySpec NewSkillSpec(SkillAbilityClass);
+		NewSkillSpec.InputID = 2;
+
+		if (AbilitySystemComponent->FindAbilitySpecFromClass(SkillAbilityClass) == false)
+		{
+			AbilitySystemComponent->GiveAbility(NewSkillSpec);
+		}
+
 		// 수동으로 어트리뷰트에 접근하는 것은 바람직하지 않지만 일부러 구현
 		const float CurrentAttackRange = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute());
 		const float CurrentAttackRate = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute());
-		
+
 		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute(), CurrentAttackRange + WeaponRange);
 		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute(), CurrentAttackRate + WeaponAttackRate);
 	}
@@ -154,11 +169,17 @@ void AABGASCharacterPlayer::UnEquipWeapon(const FGameplayEventData* EventData)
 	if (Weapon)
 	{
 		Weapon->SetSkeletalMesh(nullptr);
-		
+
+
+		if (FGameplayAbilitySpec* SkillAbilitySpec = AbilitySystemComponent->FindAbilitySpecFromClass(SkillAbilityClass))
+		{
+			AbilitySystemComponent->ClearAbility(SkillAbilitySpec->Handle);
+		}
+
 		// 수동으로 어트리뷰트에 접근하는 것은 바람직하지 않지만 일부러 구현
 		const float CurrentAttackRange = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute());
 		const float CurrentAttackRate = AbilitySystemComponent->GetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute());
-		
+
 		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRangeAttribute(), CurrentAttackRange - WeaponRange);
 		AbilitySystemComponent->SetNumericAttributeBase(UABCharacterAttributeSet::GetAttackRateAttribute(), CurrentAttackRate - WeaponAttackRate);
 	}

@@ -22,7 +22,9 @@ public:
 
 	void SetDrawDebug(bool InDrawDebug) { bDrawDebug = InDrawDebug; }
 
-private:
-	FGameplayAbilityTargetDataHandle MakeTargetData() const;
+protected:
 	bool bDrawDebug = false;
+	
+private:
+	virtual FGameplayAbilityTargetDataHandle MakeTargetData() const;
 };

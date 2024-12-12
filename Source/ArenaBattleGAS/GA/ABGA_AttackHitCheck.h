@@ -30,4 +30,7 @@ private:
 	TSubclassOf<class UGameplayEffect> AttackBuffEffect;
 	
 	float CurrentComboLevel = 0.0f;
+	
+	UPROPERTY(EditDefaultsOnly , meta=(AllowPrivateAccess=true))
+	TSubclassOf<class AABTA_Trace> TargetActorClass = nullptr;
 };

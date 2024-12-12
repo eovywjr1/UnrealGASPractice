@@ -9,11 +9,21 @@
   <component name="ChangeListManager">
     <list default="true" id="9812d267-e9c7-4228-bc4d-a8c2b1662ac6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArenaBattleGAS.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArenaBattleGAS.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArenaBattleGAS.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaBattleGAS.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Animation/AM_ComboAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Animation/AM_ComboAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Animation/AM_SkillAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Animation/AM_SkillAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Blueprint/BP_ABGASCharacterPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Blueprint/BP_ABGASCharacterPlayer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Blueprint/GA/BPGA_Attack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Blueprint/GA/BPGA_Attack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Blueprint/GA/BPGA_AttackHitCheck.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Blueprint/GA/BPGA_AttackHitCheck.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ArenaBattleGAS/Map/GASStep3.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ArenaBattleGAS/Map/GASStep3.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Character/ABGASCharacterPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Character/ABGASCharacterPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Character/ABGASCharacterPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Character/ABGASCharacterPlayer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/ABGA_AttackHitCheck.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/ABGA_AttackHitCheck.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Tag/ABGamePlayTag.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Tag/ABGamePlayTag.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/ABGA_AttackHitCheck.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/ABGA_AttackHitCheck.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/TA/ABTA_Trace.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/GA/TA/ABTA_Trace.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/GC/ABGC_AttackHit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/GC/ABGC_AttackHit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ArenaBattleGAS/Player/ABGASPlayerState.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +162,13 @@
       <workItem from="1733308783256" duration="37000" />
       <workItem from="1733311499750" duration="599000" />
       <workItem from="1733316927337" duration="24000" />
+      <workItem from="1733491630321" duration="37000" />
+      <workItem from="1733494188564" duration="32000" />
+      <workItem from="1733999887513" duration="1000" />
+      <workItem from="1734002118730" duration="14000" />
+      <workItem from="1734002777644" duration="9000" />
+      <workItem from="1734002795657" duration="6000" />
+      <workItem from="1734003952595" duration="27000" />
     </task>
     <servers />
   </component>

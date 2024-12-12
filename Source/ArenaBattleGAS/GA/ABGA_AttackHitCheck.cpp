@@ -20,7 +20,7 @@ void UABGA_AttackHitCheck::ActivateAbility(const FGameplayAbilitySpecHandle Hand
 
 	CurrentComboLevel = TriggerEventData->EventMagnitude;
 
-	UABAT_Trace* AttackTraceTask = UABAT_Trace::CreateTask(this, AABTA_Trace::StaticClass());
+	UABAT_Trace* AttackTraceTask = UABAT_Trace::CreateTask(this, TargetActorClass);
 	AttackTraceTask->OnComplete.AddDynamic(this, &ThisClass::OnTraceResultCallback);
 	AttackTraceTask->ReadyForActivation();
 }
@@ -42,7 +42,7 @@ void UABGA_AttackHitCheck::OnTraceResultCallback(const FGameplayAbilityTargetDat
 				EffectContextHandle.AddHitResult(HitResult);
 				FGameplayCueParameters CueParameters;
 				CueParameters.EffectContext = EffectContextHandle;
-				
+
 				TargetAbilitySystemComponent->ExecuteGameplayCue(GAMEPLAYCUE_CHARCTER_ATTACKHIT, CueParameters);
 			}
 		}
@@ -52,6 +52,21 @@ void UABGA_AttackHitCheck::OnTraceResultCallback(const FGameplayAbilityTargetDat
 		{
 			ApplyGameplayEffectSpecToOwner(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, BuffEffectSpecHandle);
 		}
+	}
+	else if (UAbilitySystemBlueprintLibrary::TargetDataHasActor(TargetDataHandle, 0))
+	{
+		FGameplayEffectSpecHandle EffectSpecHandle = MakeOutgoingGameplayEffectSpec(AttackDamageEffect, CurrentComboLevel);
+		if (EffectSpecHandle.IsValid())
+		{
+			ApplyGameplayEffectSpecToTarget(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, EffectSpecHandle, TargetDataHandle);
+		}
+
+		FGameplayEffectContextHandle EffectContextHandle = UAbilitySystemBlueprintLibrary::GetEffectContext(EffectSpecHandle);
+		EffectContextHandle.AddActors(TargetDataHandle.Get(0)->GetActors());
+		FGameplayCueParameters CueParameters;
+		CueParameters.EffectContext = EffectContextHandle;
+
+		GetAbilitySystemComponentFromActorInfo_Checked()->ExecuteGameplayCue(GAMEPLAYCUE_CHARCTER_ATTACKHIT, CueParameters);
 	}
 
 	bool bReplicateEndAbility = true;
